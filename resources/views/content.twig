@@ -10,9 +10,15 @@
             <div class="media-body">
 
                 <h3 class="media-heading">
-                    <a href="{{ item.get_permalink() }}" target="_blank">
+                    {% set permalink = item.get_permalink() %}
+
+                    {% if permalink matches '/^https?:\\/\\//i' %}
+                        <a href="{{ permalink }}" target="_blank" rel="noopener noreferrer">
+                            {{ item.get_title() }}
+                        </a>
+                    {% else %}
                         {{ item.get_title() }}
-                    </a>
+                    {% endif %}
 
                     <br>
 
